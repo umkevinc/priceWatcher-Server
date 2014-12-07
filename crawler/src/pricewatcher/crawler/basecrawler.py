@@ -30,28 +30,7 @@ class BaseCrawler(object):
         raise NotImplementedError("Subclasses should implement this!")
 
     def _output(self, page_dict, output_base_dir):
-        ''' return None. 
-        Writing output to file system. Called by self._crawl
-
-        Arguments: 
-            page_dict - dict. key is url and val is html.
-            output_base_dir - str. output base dir path.
-        '''
-        for url, html in page_dict.items():
-            params = urlparse.parse_qs(urlparse.urlparse(url).query)
-            brand, category = params['br'][0], params['category'][0]            
-            output_dir = os.path.join(output_base_dir, 
-                                      self._timestamp.strftime('%Y%m%d'),
-                                      self._timestamp.strftime('%H'),
-                                      brand, 
-                                      category)
-            ensure_mkdir(output_dir)
-            output_path = os.path.join(output_dir,                                     
-                                       hashlib.sha224(url).hexdigest())
-            logging.info('[WRITE] to %s' % (output_path))
-            with open(output_path, 'w') as ofile:               
-                ofile.write(url + '\n') 
-                ofile.write(html + '\n') 
+        raise NotImplementedError("Subclasses should implement this!")
 
     def _crawl(self, target_urls):
         progress = 0 

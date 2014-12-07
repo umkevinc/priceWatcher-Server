@@ -30,6 +30,6 @@ def run():
     if args.jcrew or args.all:
         category_list = JCREW_CATEGORY_LIST if not test_run else JCREW_CATEGORY_LIST[:3]    
         jcrew_crawler = JCrewCrawler(base_url=JCREW_BASE_URL,
-                                     category_list=JCREW_CATEGORY_LIST,
+                                     category_list=category_list,
                                      output_dir=output_dir)
         jcrew_crawler.run()

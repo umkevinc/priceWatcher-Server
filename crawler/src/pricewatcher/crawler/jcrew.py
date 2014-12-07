@@ -32,8 +32,7 @@ class JCrewCrawler(BaseCrawler):
         target_url_list = []
         #generate url for a brand catagory. Jcrew only has 1 url for each brand catagory.
         logging.info('Generating URL for brand: %s, category: %s' % (brand, category))
-        category_url = self._base_url + brand + "/" + category + ".jsp?iNextCategory=-1"
-        print category_url
+        category_url = self._base_url + brand + "/" + category + ".jsp?iNextCategory=-1"    
         logging.info('Brand=%s, Category=%s' % (brand, category))
         target_url_list.append(category_url)
         return target_url_list
