@@ -11,9 +11,10 @@ from pricewatcher.configs import JCREW_BASE_URL, JCREW_CATEGORY_LIST
 def run():
     parser = argparse.ArgumentParser(description='Run Crawlers')
     parser.add_argument('--output-dir', default='raw_pages', help='')
-    parser.add_argument('--f21', action='store_true', help='run foever21 crawler')
-    parser.add_argument('--jcrew', action='store_true', help='run jcrew crawler')
-    parser.add_argument('--all', action='store_true', help='run all crawlers')
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument('--f21', action='store_true', help='run foever21 crawler')
+    group.add_argument('--jcrew', action='store_true', help='run jcrew crawler')
+    group.add_argument('--all', action='store_true', help='run all crawlers')
     parser.add_argument('--test-run', action='store_true', help='')
     args = parser.parse_args()
 
