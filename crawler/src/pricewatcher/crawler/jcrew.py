@@ -2,11 +2,13 @@ import os
 import sys
 import socket
 import urllib
+import hashlib
 import logging
 import urlparse
 from time import sleep
 from bs4 import BeautifulSoup
 
+from pricewatcher.tools import ensure_mkdir
 from pricewatcher.tools import urlopen_with_retry, random_sleep
 from pricewatcher.configs import JCREW_BASE_URL, JCREW_CATEGORY_LIST
 from pricewatcher.crawler.basecrawler import BaseCrawler
@@ -56,11 +58,14 @@ class JCrewCrawler(BaseCrawler):
             output_base_dir - str. output base dir path.
         '''
         for url, html in page_dict.items():
-            params = urlparse.parse_qs(urlparse.urlparse(url).query)
-            brand, category = params['br'][0], params['category'][0]            
+            _, brand, category = urlparse.urlparse(url).path.split('/')
+            category = category[:-4]
+            if brand == 'search2':
+                brand, category = 'sale', 'all'            
             output_dir = os.path.join(output_base_dir, 
                                       self._timestamp.strftime('%Y%m%d'),
                                       self._timestamp.strftime('%H'),
+                                      'jcrew',
                                       brand, 
                                       category)
             ensure_mkdir(output_dir)

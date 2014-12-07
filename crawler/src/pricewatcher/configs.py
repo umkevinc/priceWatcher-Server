@@ -19,7 +19,7 @@ F21_CATEGORY_LIST = [
 	('f21', 'dress'),
 	('f21', 'sale'),
 	('f21', 'top'), 
-	('f21', 'whatsnew_all') # New Arrival		
+	('f21', 'whatsnew_all') # New Arrival
 ]
 
 JCREW_BASE_URL = 'http://www.jcrew.com/'
