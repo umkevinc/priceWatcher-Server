@@ -70,3 +70,6 @@ JCREWFACTORY_CATEGORY_LIST = [
 	# ('womens-clothing', 'bags_accessories'),
 	# ('womens-clothing', 'shoes')
 ]
+
+# Ann Taylor Configurations
+ANN_TAYLOR_BASE_URL = 'http://www.anntaylor.com'
