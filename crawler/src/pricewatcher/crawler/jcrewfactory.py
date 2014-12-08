@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup
 
 from pricewatcher.tools import ensure_mkdir
 from pricewatcher.tools import urlopen_with_retry, random_sleep
-from pricewatcher.configs import JCREW_BASE_URL, JCREW_CATEGORY_LIST
+from pricewatcher.configs import JCREWFACTORY_BASE_URL, JCREWFACTORY_CATEGORY_LIST
 from pricewatcher.crawler.basecrawler import BaseCrawler
 
 
@@ -18,38 +18,35 @@ logging.basicConfig(level=logging.DEBUG,
                     format='[%(asctime)s][%(levelname)s] %(message)s',
                     datefmt='%y-%m-%d %H:%M')
 
-class JCrewCrawler(BaseCrawler):
+class JCrewFactoryCrawler(BaseCrawler):
     '''
     JCrewCrawler - control what to crawl for JCrew Site. First generate
     a list of target URLs and then call URLListCrawler to crawl the page.
     '''
-    def __init__(self, base_url=JCREW_BASE_URL, category_list=JCREW_CATEGORY_LIST, 
+    def __init__(self, base_url=JCREWFACTORY_BASE_URL, category_list=JCREWFACTORY_CATEGORY_LIST, 
                        output_dir='raw_pages'):
-        super(JCrewCrawler, self).__init__(base_url, output_dir)        
+        super(JCrewFactoryCrawler, self).__init__(base_url, output_dir)        
         self._category_list = category_list
 
     def _get_sale_page_number(self):
         #first get total number of pages in sale section. Show 100 items per page.
-        sale_page1_url = "https://www.jcrew.com/search2/index.jsp?N=21&Nloc=en&Ntrm=&Npge=1&Nrpp=100&Nsrt=3&hasSplitResults=false"
+        sale_page1_url = "https://factory.jcrew.com/search2/index.jsp?N=217&Nloc=en&Ntrm=&Npge=1&Nrpp=100&Nsrt=3&hasSplitResults=false"
         html = urlopen_with_retry(sale_page1_url, timeout=60)
         soup = BeautifulSoup(html)
-        select_pnumber = soup.find("select", {"class": "pagination-dropdown"})
+        total_pnumber = soup.find("span", {"class": "pagination-total"})
         
         # Set to default
         total_pages = 1
 
-        if select_pnumber is not None:
-            dropdown_options = select_pnumber.find_all('option')           
-            if dropdown_options is not None:
-                last_page = dropdown_options[-1] # Last page
-                total_pages = last_page.text
+        if total_pnumber is not None:
+            total_pages= total_pnumber.text         
         return total_pages
 
     def _get_sale_url_list(self):
         sale_url_list = []
         total_pages = int(self._get_sale_page_number())
         for pnum in range(1, 1 + total_pages):
-            sale_url = self._base_url + "search2/index.jsp?N=21&Nloc=en&Ntrm=&Npge=" + str(pnum) + "&Nrpp=100&Nsrt=3&hasSplitResults=false"
+            sale_url = self._base_url + "search2/index.jsp?N=217&Nloc=en&Ntrm=&Npge=" + str(pnum) + "&Nrpp=100&Nsrt=3&hasSplitResults=false"
             sale_url_list.append(sale_url)
         return sale_url_list
 
@@ -89,7 +86,7 @@ class JCrewCrawler(BaseCrawler):
             output_dir = os.path.join(output_base_dir, 
                                       self._timestamp.strftime('%Y%m%d'),
                                       self._timestamp.strftime('%H'),
-                                      'jcrew',
+                                      'jcrewfactory',
                                       brand, 
                                       category)
             ensure_mkdir(output_dir)
