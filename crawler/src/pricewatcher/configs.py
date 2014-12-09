@@ -22,6 +22,8 @@ F21_CATEGORY_LIST = [
 	('f21', 'whatsnew_all') # New Arrival
 ]
 
+
+# JCrewCrawler Configs
 JCREW_BASE_URL = 'http://www.jcrew.com/'
 JCREW_CATEGORY_LIST = [
 	('womens_category', 'sweaters'),
@@ -53,6 +55,8 @@ JCREW_CATEGORY_LIST = [
 	('womens_category', 'collection')
 ]
 
+
+# JCrewFactoryCrawler Configs
 JCREWFACTORY_BASE_URL = "https://factory.jcrew.com/"
 JCREWFACTORY_CATEGORY_LIST = [
 	('womens-clothing', 'shirts_tops'),
@@ -71,5 +75,27 @@ JCREWFACTORY_CATEGORY_LIST = [
 	('womens-clothing', 'shoes')
 ]
 
-# Ann Taylor Configurations
+
+# AnnTaylorCrawler Configs
 ANN_TAYLOR_BASE_URL = 'http://www.anntaylor.com'
+
+
+# ZaraCrawler Configs
+ZARA_BASE_URL = "http://www.zara.com/"
+ZARA_CATEGORY_LIST = [
+	('woman', 'outerwear-c269183'),
+	('woman', 'blazers-c269184'),
+	('woman', 'dresses-c269185'),
+	('woman', 'jumpsuits-c663016'),
+	('woman', 'tops-c269186'),
+	('woman', 'trousers-c269187'),
+	('woman', 'jeans-c271007'),
+	('woman', 'skirts-c269188'),
+	('woman', 'knitwear-c269190'),
+	('woman', 't-shirts-c269189'),
+	('woman', 'shoes-c269191'),
+	('woman', 'handbags-c269200'),
+	('woman', 'accessories-c269207'),
+	('woman', 'studio-c476001')
+	]
+
