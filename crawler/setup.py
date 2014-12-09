@@ -20,7 +20,7 @@ setup(
         ],        
     },
     # metadata for upload to PyPI
-    author = "Kevin Cheng",
+    author = "Kevin Cheng, Sherry Wang",
     author_email = "",
     description = "",
     license = "",    

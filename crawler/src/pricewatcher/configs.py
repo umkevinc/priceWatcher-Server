@@ -1,5 +1,4 @@
 # ForeverCrawler Configs
-
 F21_BASE_URL = 'http://www.forever21.com/Product/Category.aspx?'
 F21_CATEGORY_LIST = [
 	('f21', 'sweater'),
@@ -78,7 +77,14 @@ JCREWFACTORY_CATEGORY_LIST = [
 
 # AnnTaylorCrawler Configs
 ANN_TAYLOR_BASE_URL = 'http://www.anntaylor.com'
-
+ANN_TAYLOR_CATEGORY_LIST = [
+ 'Clothing', 
+ 'Shoes',
+ 'Accessories',
+ 'Petites',
+ 'Tall',
+ 'Sale'
+]
 
 # ZaraCrawler Configs
 ZARA_BASE_URL = "http://www.zara.com/"
@@ -97,5 +103,5 @@ ZARA_CATEGORY_LIST = [
 	('woman', 'handbags-c269200'),
 	('woman', 'accessories-c269207'),
 	('woman', 'studio-c476001')
-	]
+]
 

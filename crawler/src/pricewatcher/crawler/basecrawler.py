@@ -58,6 +58,11 @@ class BaseCrawler(object):
                 logging.error("Timed out!")
                 self._failed_url_list.append(url)           
                 sleep(25)
+
+            except:
+                logging.error("Unknown Error!")
+                self._failed_url_list.append(url)           
+                sleep(25)
             logging.info('[PROGRESS] success: %s, failed: %s, total: %s' % (progress, 
                                                                             len(self._failed_url_list),
                                                                             len(target_urls)))

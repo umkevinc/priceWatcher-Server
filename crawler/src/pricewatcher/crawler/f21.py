@@ -25,7 +25,7 @@ class ForeverCrawler(BaseCrawler):
     a list of target URLs and then call URLListCrawler to crawl the page.
     '''
     def __init__(self, base_url=F21_BASE_URL, category_list=F21_CATEGORY_LIST, 
-                       output_dir='raw_pages'):
+                 output_dir='raw_pages'):
         super(ForeverCrawler, self).__init__(base_url, output_dir)        
         self._category_list = category_list        
 
