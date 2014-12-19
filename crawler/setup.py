@@ -17,8 +17,8 @@ setup(
             'pw-run-crawlers=pricewatcher.scripts.run_crawlers:run',
             'pw-run-parsers=pricewatcher.scripts.run_parsers:run',
             # Logging and Status
-            'pw-log-rotation=pricewatcher.scripts.log_rotation:run',
-            'pw-crawler-report=pricewatcher.scripts.crawler_report:run',            
+            'monitor-log-rotation=pricewatcher.scripts.log_rotation:run',
+            'monitor-crawler-report=pricewatcher.scripts.crawler_report:run',            
         ],        
     },
     # metadata for upload to PyPI
