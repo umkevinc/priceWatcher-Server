@@ -2,6 +2,7 @@ import os
 import sys
 import logging
 import smtplib
+from email.mime.text import MIMEText
 
 # Set up logging
 FORMAT = '[%(asctime)s][%(levelname)s] %(message)s'
@@ -12,11 +13,11 @@ logging.getLogger().setLevel(logging.INFO)
 class PriceWatcherServerMail(object):
     '''
     Example.
-    msg = "This is a test message"
+    content = "This is a test message"
     mailer = PriceWatcherServerMail()
     mailer.send(['kevin.cheng76@gmail.com'], 
                  'Testing Server Working Mail',
-                 msg)
+                 content)
     '''
 
     def __init__(self):        
@@ -31,11 +32,17 @@ class PriceWatcherServerMail(object):
         self._smtpserver.ehlo
         self._smtpserver.login(self._user, self._pass)
 
-    def send(self, subject, msg, to_list=None):
+    def send(self, subject, content, to_list=None):
         to_list = self._to_list if to_list is None else to_list
         logging.info('[EMAIL] recipients: %s' % to_list)
         logging.info('[EMAIL] subject: %s' % subject)
-        logging.info('[EMAIL] msg: %s' % msg)        
-        self._smtpserver.sendmail(self._user, to_list, msg)
+        logging.info('[EMAIL] content: %s' % content)
+
+        msg = MIMEText(content)
+        msg['Subject'] = subject
+        msg['From'] = self._user
+        msg['To'] = ','.join(to_list)
+
+        self._smtpserver.sendmail(self._user, to_list, msg.as_string())
         self._smtpserver.close()
         logging.info('[EMAIL] Email has sent successfully!') 
