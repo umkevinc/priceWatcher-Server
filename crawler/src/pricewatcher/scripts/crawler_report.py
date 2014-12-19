@@ -57,11 +57,10 @@ def run():
     email_subject = 'PriceWatcher Host - Crawler Status (%s)' % datetime.now()
     email_content = ''
     email_content += _print_jobs_status(file_list)
-    email_content += '\n'
     email_content += _print_failed_jobs(file_list)
     print email_subject
     print email_content
-    
+
     # Send email
     if email_flag:
         mailer = PriceWatcherServerMail()
