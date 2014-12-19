@@ -1,6 +1,12 @@
 import os
 import sys
+import logging
 import smtplib
+
+# Set up logging
+FORMAT = '[%(asctime)s][%(levelname)s] %(message)s'
+logging.basicConfig(format=FORMAT, datefmt='%m-%d-%Y %H:%M:%S')
+logging.getLogger().setLevel(logging.INFO)
 
 
 class PriceWatcherServerMail(object):
@@ -27,7 +33,9 @@ class PriceWatcherServerMail(object):
 
     def send(self, subject, msg, to_list=None):
         to_list = self._to_list if to_list is None else to_list
-        subject = 'To:' + ','.join(to_list) + '\n' + 'From: ' + self._user + '\n'
-        print subject
-        self._smtpserver.sendmail(self._user, to_list[0], msg)
+        logging.info('[EMAIL] recipients: %s' % to_list)
+        logging.info('[EMAIL] subject: %s' % subject)
+        logging.info('[EMAIL] msg:' % msg)        
+        self._smtpserver.sendmail(self._user, to_list, msg)
         self._smtpserver.close()
+        logging.info('[EMAIL] Email has sent successfully!') 

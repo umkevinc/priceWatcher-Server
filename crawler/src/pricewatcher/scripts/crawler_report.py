@@ -34,10 +34,12 @@ def run():
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('--base-dir', default='~/log')
     parser.add_argument('--date', help='format: YYYY-MM-DD')
+    parser.add_argument('--email', action='store_true', help='format: YYYY-MM-DD')
     args = parser.parse_args()
 
     base_dir = args.base_dir
     date_str = args.date
+    email_flag = args.email
 
     # Generate the file list
     file_list = []    
@@ -52,8 +54,15 @@ def run():
         return
 
     # Print status
+    email_subject = 'PriceWatcher Host - Crawler Status (%s)' % datetime.now()
     email_content = ''
     email_content += _print_jobs_status(file_list)
-    email_content += '\n\n'
+    email_content += '\n'
     email_content += _print_failed_jobs(file_list)
+    print email_subject
     print email_content
+    
+    # Send email
+    if email_flag:
+        mailer = PriceWatcherServerMail()
+        mailer.send(subject, email_content)
