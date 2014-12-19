@@ -5,18 +5,23 @@ import argparse
 from datetime import datetime
 
 
-def _main():
+def run():
     parser = argparse.ArgumentParser(description='')
+    parser.add_argument('--base-dir', default='/Users/nasa56_mini/log')
     parser.add_argument('-d', '--date', help='format: YYYY-MM-DD')
     args = parser.parse_args()
 
+    base_dir = arg.base_dir
+    date_str = args.date
+
     log_files = []
-    if args.date:
-        dt_obj = datetime.strptime(args.date, '%Y-%m-%d')
-        log_files = glob.glob('/Users/nasa56_mini/log/*%s_*.txt'
-                              % dt_obj.strftime('%Y%m%d'))
+    if date_str:
+        dt_obj = datetime.strptime(date_str, '%Y-%m-%d')
+        log_files = glob.glob(os.path.join(base_dir, 
+                                           '*%s_*.txt' % dt_obj.strftime('%Y%m%d')))
     else:
-        log_files = glob.glob('/Users/nasa56_mini/log/*.txt')
+        log_files = glob.glob(os.path.join(base_dir, 
+                                           '*.txt'))
 
     for log_file in log_files:
         base_dir, filename = os.path.split(log_file)
@@ -29,7 +34,3 @@ def _main():
         else:
             sys.stderr.write('Failed: moving from %s -> %s' % (log_file, new_path))
             sys.exit()  
-
-
-if __name__=='__main__':
-    sys.exit(_main())

@@ -4,6 +4,15 @@ import smtplib
 
 
 class PriceWatcherServerMail(object):
+    '''
+    Example.
+    msg = "This is a test message"
+    mailer = PriceWatcherServerMail()
+    mailer.send(['kevin.cheng76@gmail.com'], 
+                 'Testing Server Working Mail',
+                 msg)
+    '''
+
     def __init__(self):        
         self._user = 'kcheng.io.host@gmail.com'        
         self._pass = '2014PriceboX'
@@ -21,17 +30,3 @@ class PriceWatcherServerMail(object):
         print subject
         self._smtpserver.sendmail(self._user, to_list[0], msg)
         self._smtpserver.close()
-
-if __name__=='__main__':
-    msg = """success! 
-It's good to see this message. :)
-
-Thanks,
-
-Kevin 
-"""
-    mailer = PriceWatcherServerMail()
-    mailer.send(['kevin.cheng76@gmail.com'], 
-                 'Testing Server Working Mail',
-                 msg)
-
