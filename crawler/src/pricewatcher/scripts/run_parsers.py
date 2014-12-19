@@ -23,6 +23,7 @@ def run():
     parser.add_argument('--output-base', default='parsed_pages',  help='')
     parser.add_argument('--datetime', required=True, help='YYYYMMDD')
     parser.add_argument('--hour', default='*', help='HH')
+    parser.add_argument('--brand', default='*', help='')
     parser.add_argument('--load-es', action='store_true')
     parser.add_argument('--es-host', default='localhost')
     parser.add_argument('--es-port', default='9200')    
@@ -32,6 +33,7 @@ def run():
     # Argument parsing
     dt_str = args.datetime
     hour_str = args.hour
+    brand_str = args.brand
     input_base = args.input_base
     output_base = args.output_base
 
@@ -40,7 +42,7 @@ def run():
     load_es = args.load_es
 
     # Parsing Raw Pages
-    input_files = glob(os.path.join(input_base, dt_str, hour_str, '*', '*', '*'))    
+    input_files = glob(os.path.join(input_base, dt_str, hour_str, brand_str, '*', '*'))    
     for file_path in input_files:
         dt_str, hour_str, br, category, filename = file_path.split('/')[-5:]        
         parser = ForeverParser(file_path)
