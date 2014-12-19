@@ -5,25 +5,30 @@ import argparse
 from datetime import datetime
 from subprocess import Popen, PIPE, STDOUT
 
+from pricewatcher.utils.send_mail import PriceWatcherServerMail
+
 
 def _print_jobs_status(file_list):
+    msg = ''
     cmd = ['tail', '-n', '3'] + file_list
-    cmd_stdout, cmd_stderr = Popen(cmd, stdout=PIPE, stderr=PIPE).communicate()
-    print '[Job Status]'
-    if len(file_list) == 1:
-        print '%s:' % file_list[0]
-    print cmd_stdout, cmd_stderr
+    cmd_stdout, cmd_stderr = Popen(cmd, stdout=PIPE, stderr=PIPE).communicate()    
+    msg += '[Job Status]\n'
+    if len(file_list) == 1:    
+        msg += '%s:\n' % file_list[0]    
+    msg += '%s\n' % cmd_stdout    
+    return msg
 
 
 def _print_failed_jobs(file_list):
+    msg = ''
     cmd = ['grep', '-Hi', 'Err', '--line-buffer'] + file_list
     cmd_stdout, cmd_stderr = Popen(cmd, stdout=PIPE, stderr=PIPE).communicate()
-    print '[Failed Jobs]'
-    if cmd_stdout:    
-        print cmd_stdout, cmd_stderr 
+    msg += '[Failed Jobs]\n'
+    if cmd_stdout:
+        msg += '%s\n'% cmd_stdout        
     else:
-        print 'No Failed Jobs!'
-
+        msg += '%s\n' % 'No Failed Jobs!'
+    return msg
 
 def run():
     parser = argparse.ArgumentParser(description='')
@@ -47,5 +52,8 @@ def run():
         return
 
     # Print status
-    _print_jobs_status(file_list)
-    _print_failed_jobs(file_list)
+    email_content = ''
+    email_content += _print_jobs_status(file_list)
+    email_content += '\n\n'
+    email_content += _print_failed_jobs(file_list)
+    print email_content
