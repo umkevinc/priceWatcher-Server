@@ -35,7 +35,7 @@ class PriceWatcherServerMail(object):
         to_list = self._to_list if to_list is None else to_list
         logging.info('[EMAIL] recipients: %s' % to_list)
         logging.info('[EMAIL] subject: %s' % subject)
-        logging.info('[EMAIL] msg:' % msg)        
+        logging.info('[EMAIL] msg: %s' % msg)        
         self._smtpserver.sendmail(self._user, to_list, msg)
         self._smtpserver.close()
         logging.info('[EMAIL] Email has sent successfully!') 

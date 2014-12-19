@@ -54,7 +54,7 @@ def run():
         return
 
     # Print status
-    email_subject = 'PriceWatcher Host - Crawler Status (%s)' % datetime.now()
+    email_subject = 'PriceWatcher Host - Crawler Status (%s)' % datetime.now().strftime('%Y-%m-%d %H:%M')
     email_content = ''
     email_content += _print_jobs_status(file_list)
     email_content += _print_failed_jobs(file_list)
