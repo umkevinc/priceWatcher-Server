@@ -29,7 +29,7 @@ def run():
     parser.add_argument('--date', help='format: YYYY-MM-DD')
     args = parser.parse_args()
 
-    base_dir = arg.base_dir
+    base_dir = args.base_dir
     date_str = args.date
 
     # Generate the file list
