@@ -42,7 +42,7 @@ def run():
     load_es = args.load_es
 
     # Parsing Raw Pages
-    input_files = glob(os.path.join(input_base, dt_str, hour_str, brand_str, '*', '*'))    
+    input_files = glob(os.path.join(input_base, dt_str, hour_str, brand_str, '*', '*', '*'))    
     for file_path in input_files:
         dt_str, hour_str, br, category, filename = file_path.split('/')[-5:]        
         parser = ForeverParser(file_path)
