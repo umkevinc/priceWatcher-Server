@@ -10,6 +10,8 @@ def _print_jobs_status(file_list):
     cmd = ['tail', '-n', '3'] + file_list
     cmd_stdout, cmd_stderr = Popen(cmd, stdout=PIPE, stderr=PIPE).communicate()
     print '[Job Status]'
+    if len(file_list) == 1:
+        print '%s:' % file_list[0]
     print cmd_stdout, cmd_stderr
 
 
