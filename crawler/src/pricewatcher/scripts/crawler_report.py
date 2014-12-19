@@ -19,8 +19,8 @@ def _print_failed_jobs(file_list):
     print '[Failed Jobs]'
     if cmd_stdout:    
         print cmd_stdout, cmd_stderr 
-    else
-        print 'No Failed Jos.'
+    else:
+        print 'No Failed Jobs!'
 
 
 def run():
