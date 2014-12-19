@@ -64,4 +64,4 @@ def run():
     # Send email
     if email_flag:
         mailer = PriceWatcherServerMail()
-        mailer.send(subject, email_content)
+        mailer.send(email_subject, email_content)
