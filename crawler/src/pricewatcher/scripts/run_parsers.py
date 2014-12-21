@@ -9,6 +9,10 @@ from pricewatcher.tools import ensure_mkdir
 from pricewatcher.parser.f21 import ForeverParser
 from pricewatcher.utils.load_es import bulk_load_es
 
+BRAND_LIST=[
+'forever21'
+]
+
 # Set up logging
 FORMAT = '[%(asctime)s][%(levelname)s] %(message)s'
 logging.basicConfig(format=FORMAT, datefmt='%m-%d-%Y %H:%M:%S')
@@ -19,15 +23,15 @@ def date_handler(obj):
 
 def run():
     parser = argparse.ArgumentParser(description='Process some integers.')
-    parser.add_argument('--input-base', default='raw_pages', help='')
+    parser.add_argument('--input-base', required=True, help='')
     parser.add_argument('--output-base', default='parsed_pages',  help='')
     parser.add_argument('--datetime', required=True, help='YYYYMMDD')
     parser.add_argument('--hour', default='*', help='HH')
-    parser.add_argument('--brand', default='*', help='')
+    parser.add_argument('--brand', default='*', choices=BRAND_LIST, help='')
     parser.add_argument('--load-es', action='store_true')
-    parser.add_argument('--es-host', default='localhost')
-    parser.add_argument('--es-port', default='9200')    
-    parser.add_argument('--es-cleanup', action='store_true')
+    parser.add_argument('--es-host', default='localhost', help='default to localhost')
+    parser.add_argument('--es-port', default='9200', help='default to 9200')    
+    parser.add_argument('--es-cleanup', action='store_true', help='remove index before loading new data')
     args = parser.parse_args()
 
     # Argument parsing
