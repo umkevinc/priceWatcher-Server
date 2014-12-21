@@ -10,7 +10,7 @@ setup(
 
     # Project uses reStructuredText, so ensure that the docutils get
     # installed or upgraded on the target machine
-    install_requires = ['Beautifulsoup4'],
+    install_requires = ['Beautifulsoup4', 'elasticsearch'],
     package_data = {},
     entry_points={
         'console_scripts': [

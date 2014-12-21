@@ -23,7 +23,7 @@ class PriceWatcherServerMail(object):
     def __init__(self):        
         self._user = 'kcheng.io.host@gmail.com'        
         self._pass = '2014PriceboX'
-        self._to_list = ['kevin.cheng76@gmail.com', 'sherry415@gmail.com']
+        self._to_list = ['kevin.cheng76@gmail.com', 'btswt22@gmail.com']
     
         self._smtpserver = smtplib.SMTP('smtp.gmail.com', port=587)
         self._smtpserver.set_debuglevel(1)

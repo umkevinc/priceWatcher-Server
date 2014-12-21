@@ -43,8 +43,8 @@ def run():
 
     # Parsing Raw Pages
     input_files = glob(os.path.join(input_base, dt_str, hour_str, brand_str, '*', '*', '*'))    
-    for file_path in input_files:
-        dt_str, hour_str, br, category, filename = file_path.split('/')[-5:]        
+    for file_path in input_files:        
+        dt_str, hour_str, br, category, sub_category, filename = file_path.split('/')[-6:]        
         parser = ForeverParser(file_path)
         doc_list = parser.parse()
         logging.info('[STATUS] parsed %s docs from %s' % (len(doc_list), file_path))
