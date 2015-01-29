@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html ng-app='app'>
+<head>
+	<meta charset="utf-8">  <!-- it's important for d3.js -->	
+	<link rel="stylesheet" href="bower_components/nvd3/nv.d3.css">
+	<link href="assets/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+	<style>	
+
+	</style>
+</head>
+<body ng-controller="mainController">
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <!-- Brand and toggle get grouped for better mobile display -->
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <a class="navbar-brand" href="#home">Style Steal</a>
+	    </div>
+
+	    <!-- Collect the nav links, forms, and other content for toggling -->	    
+	    <div class="collapse navbar-collapse">	      
+	      <ul class="nav navbar-nav">
+	        <li><a href="#track">Track Prices<span class="sr-only">(current)</span></a></li>
+	        <li><a href="#">Find Deals</a></li>
+	        <li><a href="#">My Watch List</a></li>	        
+	      </ul>	
+	      <ul class="nav navbar-nav navbar-right">
+	        <li><a href="#">Log In</a></li>
+	        <li><a href="#">Sign up</a></li>	        
+	      </ul>	    	  	  
+	    </div><!-- /.navbar-collapse -->
+	  </div><!-- /.container-fluid -->	  
+	</nav>
+
+	<div class="container">
+		<div ui-view></div>
+	</div>	
+
+	<!-- Import Javascrips -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>	
+	<script src="assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="assets/bower_components/angularjs/angular.min.js"></script>
+	<script src="assets/bower_components/elasticsearch/elasticsearch.angular.min.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+	<script src="bower_components/d3/d3.js"></script>
+	<script src="bower_components/nvd3/nv.d3.js"></script> <!-- or use another assembly -->
+	<script src="bower_components/angular-nvd3/dist/angular-nvd3.js"></script>
+
+	<!-- Custom JavaScript -->	
+	<script src="app/app.module.js"></script>
+	<script src="app/app.routes.js"></script>
+	<script src="app/shared/chart.options.js"></script>	
+	<script src="app/shared/esService.js"></script>	
+	<script src="app/components/trackPrice/trackPriceController.js"></script>	
+	<script>
+		app.controller('mainController', ['$scope', 'esClient', function($scope, esClient) {
+
+		}]);
+	
+	</script>
+</body>
+</html>
