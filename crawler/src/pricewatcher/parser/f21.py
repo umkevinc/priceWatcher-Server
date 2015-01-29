@@ -44,7 +44,7 @@ class ForeverParser(object):
             img_url = img_div.find('a', {'class': 'pdpLink'}).find('img').get('src')            
             item_name = cell.find('div', {'class': 'DisplayName'}).text
             original_price = cell.find('font', {'class': 'oprice'})
-            item_price = cell.find('font', {'class': 'price'}).text
+            item_price = cell.find('font', {'class': 'price'}).text.strip().split('$')[-1]
 
             params = urlparse.parse_qs(urlparse.urlparse(page_url).query)
             product_id = params['ProductID']
@@ -62,7 +62,7 @@ class ForeverParser(object):
             if sold_out:
                 doc['sold_out'] = True
             if original_price:
-                doc['original_price'] = original_price.text            
+                doc['original_price'] = original_price.text.strip().split('$')[-1]            
             item_list.append(doc)            
         return item_list    
 

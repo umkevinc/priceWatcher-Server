@@ -1,2 +1,7 @@
 priceWatcher
 ============
+
+
+
+Parsed doc schema
+=================
