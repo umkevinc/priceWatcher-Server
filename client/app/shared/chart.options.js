@@ -50,7 +50,7 @@ var nvd3LineOptions = {
         noData: '',
         interpolate:'step-after',  
         lines:{
-        	padData: false,
+        	size: function(){ return 0;}
         }      
-    }	            
+    }    
 };

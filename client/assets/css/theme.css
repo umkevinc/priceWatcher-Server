@@ -1,0 +1,203 @@
+body {
+  font-family: helvetica, arial, "Sans Serif";
+  font-weight: 300;
+  color: #666;
+}
+footer{
+  font-family: helvetica, arial, "Sans Serif";
+  font-weight: 300;
+  height: 250px;
+  background-color: #777;
+  color: white;
+  padding: 30px 30px;
+}
+.navbar-default {
+  background-color: rgb(3, 169, 244); 
+  border-style:none;
+  border-radius:0;   
+  box-shadow: 0px 1px 10px #555;
+  height: 60px;
+  padding-top: 5px;
+  padding-left: 13px;
+}
+.navbar-default .navbar-brand {
+  color: #f9fdff; 
+  margin-right: 80px;
+}
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
+  color: #ffffff;
+}
+.navbar-default .navbar-text {
+  color: #f9fdff;
+}
+.navbar-default .navbar-nav > li > a {  
+  color: #f9fdff;
+}
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+  color: #ffffff;
+}
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+  color: #ffffff;
+  background-color: #00664b;
+}
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+  color: #ffffff;
+  background-color: #00664b;
+}
+.navbar-default .navbar-toggle {
+  border-color: #00664b;
+}
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+  background-color: #00664b;
+}
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #f9fdff;
+}
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+  border-color: #f9fdff;
+}
+.navbar-default .navbar-link {
+  color: #f9fdff;
+}
+.navbar-default .navbar-link:hover {
+  color: #ffffff;
+}
+
+@media (max-width: 767px) {
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: #f9fdff;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #ffffff;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #ffffff;
+    background-color: #00664b;
+  }
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 40px;
+  min-height: 100%;
+  min-width: 200px;
+  /*background-color: black;*/
+  /*background-color: rgb(255,127,14);*/
+  background-color: #232323;
+  border-radius: 0;
+  border-style: none; 
+  /*border-bottom: 150px solid rgb(3, 169, 244);  */
+}
+.sidebar ul {  
+  display: inline;
+  margin: 0;  
+  list-style-type: none;
+  text-align: left;
+}
+.sidebar ul li {
+  line-height: 50px;
+  border-bottom: 1px solid white;
+  /*border-bottom: 1px solid rgb(3, 169, 244);*/
+}
+.sidebar ul li:hover{
+  /*background-color: rgb(3, 169, 244);*/
+  /*background-color: #232323;*/
+  background-color: #ccc;
+}
+.sidebar ul li a {  
+  margin-left: 30px;
+  display:block;
+  font-size: 11pt;    
+  color: white;
+  /*color: rgb(3, 169, 244);*/
+}
+.sidebar ul li a:hover {
+  /*color: white; */
+  color:rgb(3, 169, 244);
+  color: black;
+  text-decoration: none;
+}
+ /*  div below nav */
+#below-nav {
+  background-color: transparent;
+  height: 50px;
+  margin-top: 50px;
+
+}
+
+/*Input*/
+input{      
+    border:1px solid rgb(3, 169, 244); 
+    font-size: 14px;    
+    padding:5px;
+    /*margin-top:-10px; */
+    color: rgb(3, 169, 244);         
+}
+#main-container {
+}
+
+/*.btn-custom {  
+  background-color: #888;  
+  border-radius: 0px; 
+  border-style: none;
+  color: white;
+  font-family: helvetica, arial, "Sans Serif";
+  font-weight: 200;  
+}
+.btn-custom2 {  
+  background-color: white;  
+  border-radius: 0px; 
+  border: 1px solid #888;
+  color: #888;
+  font-family: helvetica, arial, "Sans Serif";
+  font-weight: 200;  
+}*/
+.btn-buy {
+  background-color: rgb(3, 169, 244);
+  border-radius: 0px; 
+  border-style: none;
+  color: white;
+  font-family: helvetica, arial, "Sans Serif";
+  font-weight: 200;    
+}
+
+.btn-like {  
+  background-color: white;  
+  border-radius: 0px; 
+  border: 1px solid rgb(3, 169, 244);
+  color: rgb(3, 169, 244);
+  font-family: helvetica, arial, "Sans Serif";
+  font-weight: 200;    
+}
+#fix-right {
+  float: right;
+  padding-right: 0;  
+}
+
+h4 a {
+  /*color: rgb(255,127,14);*/
+  color:  rgb(3, 169, 244);
+}
+h4 a:hover {
+  color: rgb(255,127,14);
+  text-decoration: none;
+}
+
+
+.item-card {  
+  margin-bottom: 15px;
+  background-color: #f9f9f9;
+  padding:0px 0px 0px 0px;
+  box-shadow: 0px 0.5px 6px #ccc;
+  border-left: 13px solid rgb(3, 169, 244);
+}
+
+.user-comment{
+  background-color: #CCC;
+  padding-left: 3px;
+}
+
+
+

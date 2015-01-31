@@ -11,4 +11,14 @@ app.config(function($stateProvider, $urlRouterProvider){
 			templateUrl: 'app/components/trackPrice/partial-track-price.html',
 			controller: 'trackController'
 		})
+		.state('deals', {
+			url: '/deals',
+			templateUrl: 'app/components/findDeals/partial-find-deals.html',
+			//controller: 'dealsController'
+		})
+		.state('watchlist', {
+			url: '/watchlist',
+			templateUrl: 'app/components/watchList/partial-watchlist.html',
+			//controller: 'watchlistController'
+		})
 });

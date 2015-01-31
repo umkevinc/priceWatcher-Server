@@ -38,7 +38,7 @@ app.controller('trackController', ['$scope', 'esClient', function($scope, esClie
 		  	// Loop through each item get price history
 		  	var price_chart_data = [];
 		  	var price_qbody = {				  		
-		  		"size": 150,
+		  		"size": 30,
 	  			"query": {			  				
 				 	"term" : { 'product_id': item_doc.product_id}
 				}, 						
@@ -67,7 +67,8 @@ app.controller('trackController', ['$scope', 'esClient', function($scope, esClie
 		  	entry._source.data = [{
 		  		values: price_chart_data,
 		  		key: 'price',
-		  		color: 'Crimson'
+		  		//color: '#f44336'
+		  		color: 'rgb(255,127,14)'
 		  	}]
 		  	$scope.docs.push(entry._source);
 		  });
