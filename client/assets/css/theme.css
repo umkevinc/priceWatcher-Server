@@ -80,7 +80,7 @@ footer{
 /* Sidebar */
 .sidebar {
   position: fixed;
-  top: 40px;
+  top: 60px;
   min-height: 100%;
   min-width: 200px;
   /*background-color: black;*/
@@ -88,6 +88,9 @@ footer{
   background-color: #232323;
   border-radius: 0;
   border-style: none; 
+  padding-left: 10px;
+  padding-right: 30px;
+  box-shadow: 0px 1px 10px #555;
   /*border-bottom: 150px solid rgb(3, 169, 244);  */
 }
 .sidebar ul {  
@@ -97,8 +100,8 @@ footer{
   text-align: left;
 }
 .sidebar ul li {
-  line-height: 50px;
-  border-bottom: 1px solid white;
+  line-height: 30px;
+  /*border-bottom: 1px solid white;*/
   /*border-bottom: 1px solid rgb(3, 169, 244);*/
 }
 .sidebar ul li:hover{
@@ -107,7 +110,7 @@ footer{
   background-color: #ccc;
 }
 .sidebar ul li a {  
-  margin-left: 30px;
+  margin-left: 15px;
   display:block;
   font-size: 11pt;    
   color: white;
@@ -115,7 +118,7 @@ footer{
 }
 .sidebar ul li a:hover {
   /*color: white; */
-  color:rgb(3, 169, 244);
+  color: rgb(3, 169, 244);
   color: black;
   text-decoration: none;
 }
@@ -128,6 +131,9 @@ footer{
 }
 
 /*Input*/
+hr{
+  margin: 8px 0px;
+}
 input{      
     border:1px solid rgb(3, 169, 244); 
     font-size: 14px;    
@@ -171,10 +177,6 @@ input{
   font-family: helvetica, arial, "Sans Serif";
   font-weight: 200;    
 }
-#fix-right {
-  float: right;
-  padding-right: 0;  
-}
 
 h4 a {
   /*color: rgb(255,127,14);*/
@@ -186,12 +188,17 @@ h4 a:hover {
 }
 
 
-.item-card {  
-  margin-bottom: 15px;
+.itemcard {
+  margin-right: 1px;
+  margin-bottom: 15px;  
   background-color: #f9f9f9;
   padding:0px 0px 0px 0px;
   box-shadow: 0px 0.5px 6px #ccc;
-  border-left: 13px solid rgb(3, 169, 244);
+  /*border-top: 5px solid rgb(3, 169, 244);*/
+  border-bottom: 5px solid rgb(3, 169, 244);
+}
+.item-description,.item-pricehist {
+  line-height: 5pt;
 }
 
 .user-comment{

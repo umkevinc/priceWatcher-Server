@@ -20,12 +20,12 @@ var nvd3SparkOptions = {
 var nvd3LineOptions = {	
     chart: {    	
         type: 'lineChart',
-        height: 150,
+        height: 100,
         margin : {
-            top: 20,
+            top: 3,
             right: 20,
-            bottom: 40,
-            left: 55
+            bottom: 20,
+            left: 33
         },
 
         x: function(d){ return d.x; },  
@@ -39,7 +39,7 @@ var nvd3LineOptions = {
             showMaxMin: false,            
         },
         yAxis: {
-            axisLabel: 'Price ($)',
+            //axisLabel: 'Price ($)',
             tickFormat: function(d){
                 return d3.format('.02f')(d);
             },

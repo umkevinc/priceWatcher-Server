@@ -3,7 +3,7 @@ app.controller('trackController', ['$scope', 'esClient', function($scope, esClie
 	$scope.search_params = {
 		'brand': 'forever21',
 		'current_page': 0,
-		'size': 10,				
+		'size': 12,				
 	}
 
 	$scope.$watch('search_params', function(newValue, oldValue) {
