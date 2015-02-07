@@ -1,7 +1,17 @@
 app.controller('trackController', ['$scope', 'esClient', function($scope, esClient){
 	$scope.docs = []
+	// $scope.$parent.$watch('search_params', function(newValue, oldValue){
+
+	// }, true);
+
 	$scope.search_params = {
-		'brand': 'forever21',
+		//'brand': $scope.$parent.search_params.brand,
+		//'category': $scope.$parent.search_params.category,
+		// 'brand': 'forever21',
+		// 'category': 'f21',
+		'brand': 'jcrew',
+		'category': 'sale',
+		'sub_category': 'sale',
 		'current_page': 0,
 		'size': 12,				
 	}
@@ -15,42 +25,42 @@ app.controller('trackController', ['$scope', 'esClient', function($scope, esClie
 				"bool":{
 					"must":[
 						{"match": { "item_name": newValue.searchStr}},
-						{"match": { "sub_category": "sale"}}		
+						// {"match": { "sub_category": newValue.sub_category}}
 					]
 				}
 			},
 			"sort" : [
 				{ "datetime" : {"order" : "desc"}},	
+				{ "perct_price_off" : {"order" : "desc"}},	
 			]
 		}
 		console.log(query_body)
-		//Query ES
+		// Query ES
 		esClient.search({
 		  index: newValue.brand,
-		  type: 'f21',
+		  type: newValue.category,
 		  body: query_body
 		}).then(function (body) {
-		  var docs = body.hits.hits;				  
+		  var docs = body.hits.hits;
 		  $scope.docs = [];
 		  docs.forEach(function(entry){
-		  	item_doc = entry._source;
-
+		  	item_doc = entry._source;		  	
 		  	// Loop through each item get price history
 		  	var price_chart_data = [];
-		  	var price_qbody = {				  		
-		  		"size": 30,
-	  			"query": {			  				
-				 	"term" : { 'product_id': item_doc.product_id}
-				}, 						
+		  	var price_qbody = {	
+		  		"size": 200,
+	  			"query": {
+				 	"match" : {'product_id': item_doc.product_id}
+				},
 				"sort" : [
     				{ "datetime" : {"order" : "desc"}},	
     			]
 		  	};
 		  	esClient.search({
 			  index: newValue.brand,
-			  type: 'f21',
+			  type: 'price',
 			  body: price_qbody
-			}).then(function (price_resp) {										
+			}).then(function (price_resp) {				
 				price_lst = price_resp.hits.hits.reverse();					
 				price_lst.forEach(function(doc){
 					price_chart_data.push({
@@ -58,7 +68,7 @@ app.controller('trackController', ['$scope', 'esClient', function($scope, esClie
 						y: parseFloat(doc._source['price'])
 					})
 				})						
-				// console.log(price_chart_data)						
+				//console.log(price_chart_data)						
 			});
 			// End price history
 

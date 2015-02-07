@@ -1,24 +1,26 @@
 <!DOCTYPE html>
-<html ng-app='app'>
+<html ng-app='app' lang="en-US">
 <head>
 	<meta charset="utf-8">  <!-- it's important for d3.js -->	
 	<link rel="stylesheet" href="bower_components/nvd3/nv.d3.css">
-	<link href="assets/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="assets/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">	
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<link href="assets/css/theme.css" rel="stylesheet">
-	<style>	
-	.navbar-inverse {
-		border-radius: 0px;		
-	}
+	<link rel="icon" type="image/png" href="assets/img/stylesteal_favicon.png">
+	<style>		
 	</style>
 
 </head>
+
 <body ng-controller="mainController">
 	<div class="container">
 	<nav class="navbar navbar-default navbar-fixed-top">
 	  <div class="container-fluid">
 	    <!-- Brand and toggle get grouped for better mobile display -->
 	    <div class="navbar-header">	      
-	      <a class="navbar-brand" style=" font-weight:normal;" href="#home">STYLE STEAL</a>
+	      <!-- <a class="navbar-brand" style=" font-weight:normal;" href="#home">STYLE STEAL</a> -->
+
+	      <a class="navbar-brand"><img src="assets/img/stylesteal_logo.png" width="150" alt="STYLE STEAL"></a>
 	    </div>
 	    <!-- Collect the nav links, forms, and other content for toggling -->	    
 	    <div class="collapse navbar-collapse">	      
@@ -42,14 +44,14 @@
 	</div>	
 
 	<div class="sidebar">
-		<!-- Start Brand Filter-->
+		<!-- Start Brand Filter-->		
 		<ul>
 			<p><h5><strong>BRAND</strong></h5></p>
 			<hr/>
-	        <li><a href="#">Ann Taylor<span class="sr-only">(current)</span></a></li>	        
-	        <li><a href="#">Forever 21</a></li>	        
-	        <li><a href="#">J. Crew</a></li>	     	        
-	        <li><a href="#">J. Crew Factory</a></li>	        	        
+	        <li><a href="#" ng-click='search_params.brand="forever21";search_params.category="f21";'>Forever 21</a></li>	        
+	        <li><a href="#" ng-click='search_params.brand="jcrew";search_params.category="sale";'>J. Crew</a></li>	     	        
+	        <li><a href="#">J. Crew Factory</a></li>
+	        <li><a href="#">Ann Taylor<span class="sr-only">(current)</span></a></li>
 	    </ul>	
 	    <!-- Start Filter-->
 	    <ul>
@@ -59,8 +61,38 @@
 	    <!-- Start Watchlist-->
 	    <ul>
 	    	<p><h5><strong>MY WATCHLIST</strong></h5></p>
-			<hr/>			
+			<hr/>		
 	    </ul>
+	    <footer class="navbar-fixed-bottom">	    	
+	    	<div class="row">
+	    		<div class="col-md-12">
+	    			<ul class="list-inline">
+			    		<li>&copy; 2015 STYLE STEAL</li>		    		
+			    	</ul>
+			    </div>
+		    </div>
+	    	<div class="row">
+	    		<div class="col-md-12">
+			    	<ul class="list-inline">
+			    		<li>About</li>
+			    		<li>Terms</li>
+			    		<li>Blog</li>			    		
+			    		<li>Contact</li>
+			    	</ul>		    	
+		    	</div>
+		    </div>
+		    <div class="row">
+	    		<div class="col-md-12">
+	    			<ul class="list-inline">	    				
+			    		<li><i class="fa fa-facebook-square"></i></li>
+			    		<li><i class="fa fa-twitter"></i></li>
+			    		<li><i class="fa fa-pinterest"></i></li>			    		
+			    		<li><i class="fa fa-instagram"></i></li> 		
+			    		<li><i class="fa fa-envelope-o"></i></li>
+			    	</ul>
+			    </div>
+		    </div>	    
+	    </footer>
 	</div>	
 	<!-- Import Javascrips -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>	
@@ -73,6 +105,7 @@
 	<script src="bower_components/angular-nvd3/dist/angular-nvd3.js"></script>
 	<script src="http://luis-almeida.github.io/unveil/jquery.unveil.js"></script>
 
+
 	<!-- Custom JavaScript -->	
 	<script src="app/app.module.js"></script>
 	<script src="app/app.routes.js"></script>
@@ -81,7 +114,10 @@
 	<script src="app/components/trackPrice/trackPriceController.js"></script>	
 	<script>
 		app.controller('mainController', ['$scope', 'esClient', function($scope, esClient) {
-
+			$scope.search_params = {				
+				'brand': 'forever21',
+				'category': 'f21',
+			}
 		}]);
 	</script>
 </body>

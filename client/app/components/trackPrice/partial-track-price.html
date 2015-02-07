@@ -30,7 +30,8 @@
 					<div class="col-md-12">					
 						<h5><a ng-href="{{doc.page_url}}">{{doc.item_name | limitTo : 50}}</a></h5>
 						<p><small>{{doc.brand | uppercase}} / {{doc.sub_category}} </small></p>
-						<p><small>Now ${{doc.price}}<strike>Was ${{doc.original_price}}</strike></small></p>						
+						<p><strike><small>Was ${{doc.original_price}}</strike></small></p>
+						<p><small>Now ${{doc.price}}</small></p> 						
 					</div>
 				</div><!-- End description -->
 
@@ -38,7 +39,8 @@
 					<div class="col-md-12"> 
 						<p><nvd3 options="lineOptions" data="doc.data"></nvd3></p>
 					</div>
-				</div>				
+				</div>			
+				<hr/>	
 				<div class="row"> 
 					<div class="col-md-12">
 						<button href="#" type="button" class="btn btn-sm btn-buy">Buy</button> 
@@ -51,12 +53,12 @@
 	</div>			
 </div>
 <div class="row"> <!-- pagination -->
-	<div class="col-md-10"></div>
-	<div class="col-md-2">
-	<p>
-	<button ng-click="search_params.current_page = search_params.current_page - 1" ng-init="search_params.current_page=0" type="button" class="btn btn-buy ">Previous</button> 
-	<button ng-click="search_params.current_page = search_params.current_page + 1" ng-init="search_params.current_page=0" type="button" class="btn btn-buy">Next</button> 
-	</p>
+	<div class="col-md-10"></div>	
+	<div class="col-md-1">
+		<button ng-click="search_params.current_page = search_params.current_page - 1" ng-init="search_params.current_page=0" type="button" class="btn btn-buy pull-right">Previous</button> 
+	</div>
+	<div class="col-md-1">
+		<button ng-click="search_params.current_page = search_params.current_page + 1" ng-init="search_params.current_page=0" type="button" class="btn btn-buy pull-right">Next</button> 
 	</div>
 </div>
 <div class="row"> <!-- pagination -->

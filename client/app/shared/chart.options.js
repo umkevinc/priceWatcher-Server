@@ -25,7 +25,7 @@ var nvd3LineOptions = {
             top: 3,
             right: 20,
             bottom: 20,
-            left: 33
+            left: 40
         },
 
         x: function(d){ return d.x; },  
@@ -34,9 +34,10 @@ var nvd3LineOptions = {
         xAxis: {
             //axisLabel: 'Date',
             tickFormat: function(d){
-                 return  d3.time.format('%x')(new Date(d));
+                 return  d3.time.format('%Y-%m-%d')(new Date(d));
             },
             showMaxMin: false,            
+            
         },
         yAxis: {
             //axisLabel: 'Price ($)',
