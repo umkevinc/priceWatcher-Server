@@ -30,7 +30,7 @@ class ForeverParser(object):
         return url, soup    
 
     def parse(self):
-        item_list = []  
+        item_list, price_list = [], [] 
         category_list = self._soup.find("table", {'class': 'dlCategoryList'})
         if not category_list: return item_list
         
@@ -44,7 +44,7 @@ class ForeverParser(object):
             img_url = img_div.find('a', {'class': 'pdpLink'}).find('img').get('src')            
             item_name = cell.find('div', {'class': 'DisplayName'}).text
             original_price = cell.find('font', {'class': 'oprice'})
-            item_price = cell.find('font', {'class': 'price'}).text.strip().split('$')[-1]
+            item_price = float(cell.find('font', {'class': 'price'}).text.strip().split('$')[-1])
 
             params = urlparse.parse_qs(urlparse.urlparse(page_url).query)
             product_id = params['ProductID']
@@ -55,14 +55,27 @@ class ForeverParser(object):
                 'product_id': product_id[0],
                 'img_url': img_url,
                 'page_url': page_url,
-                'item_name': item_name,
-                'price': item_price,
+                'item_name': item_name,                
                 'datetime': self._record_datetime,
+                'price': item_price,
             }
+            
             if sold_out:
                 doc['sold_out'] = True
+
+            # Price Doc
+            price_doc = {
+                'product_id': product_id[0],
+                'price': item_price,
+                'datetime': self._record_datetime,
+            }            
             if original_price:
-                doc['original_price'] = original_price.text.strip().split('$')[-1]            
-            item_list.append(doc)            
-        return item_list    
+                doc['original_price'] = float(original_price.text.strip().split('$')[-1])
+                price_doc['original_price'] = float(original_price.text.strip().split('$')[-1])
+                doc['price_off'] = doc['original_price'] - doc['price']
+                doc['perct_price_off'] = 1.0*(doc['original_price'] - doc['price'])/doc['original_price']
+            price_list.append(price_doc)
+            item_list.append(doc)
+
+        return item_list, price_list
 

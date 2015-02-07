@@ -13,7 +13,7 @@ def bulk_load_es(host, port, es_index, es_doctype, doc_list, opt_dict={}):
 			yield lst[i:i+chunk_size]
 
 	es = Elasticsearch(host=host, port=port)
-	if not opt_dict:
+	if not opt_dict and opt_dict is not None:
 		opt_dict = {
 			'index': {
 				'_index': es_index, 
@@ -23,7 +23,10 @@ def bulk_load_es(host, port, es_index, es_doctype, doc_list, opt_dict={}):
 
 	if doc_list:
 		for sub_list in chunks(doc_list, 100):
-			output_body = list(chain(*zip([opt_dict for i in range(len(sub_list))], sub_list)))
+			if opt_dict is not None:		
+				output_body = list(chain(*zip([opt_dict for i in range(len(sub_list))], sub_list)))
+			else:
+				output_body = sub_list
 			es.bulk(
 				index=es_index,
 				doc_type=es_doctype,

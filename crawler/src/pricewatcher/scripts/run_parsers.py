@@ -7,11 +7,13 @@ from glob import glob
 
 from pricewatcher.tools import ensure_mkdir
 from pricewatcher.parser.f21 import ForeverParser
+from pricewatcher.parser.jcrew import JcrewParser
 from pricewatcher.utils.load_es import bulk_load_es
 
-BRAND_LIST=[
-'forever21'
-]
+BRAND_PARSERS={
+'forever21': ForeverParser, 
+'jcrew': JcrewParser
+}
 
 # Set up logging
 FORMAT = '[%(asctime)s][%(levelname)s] %(message)s'
@@ -27,7 +29,7 @@ def run():
     parser.add_argument('--output-base', default='parsed_pages',  help='')
     parser.add_argument('--datetime', required=True, help='YYYYMMDD')
     parser.add_argument('--hour', default='*', help='HH')
-    parser.add_argument('--brand', default='*', choices=BRAND_LIST, help='')
+    parser.add_argument('--brand', default='*', choices=BRAND_PARSERS.keys(), help='')
     parser.add_argument('--load-es', action='store_true')
     parser.add_argument('--es-host', default='localhost', help='default to localhost')
     parser.add_argument('--es-port', default='9200', help='default to 9200')    
@@ -49,8 +51,11 @@ def run():
     input_files = glob(os.path.join(input_base, dt_str, hour_str, brand_str, '*', '*', '*'))    
     for file_path in input_files:        
         dt_str, hour_str, br, category, sub_category, filename = file_path.split('/')[-6:]        
-        parser = ForeverParser(file_path)
-        doc_list = parser.parse()
+        parser = BRAND_PARSERS[brand_str](file_path)
+        parsed_docs = parser.parse()
+        if parsed_docs:
+              doc_list, price_list = parsed_docs
+
         logging.info('[STATUS] parsed %s docs from %s' % (len(doc_list), file_path))
         if not load_es:        
             # Output Result            
@@ -58,10 +63,18 @@ def run():
             ensure_mkdir(output_dir)
             output_path = os.path.join(output_dir, filename + '.json')        
             logging.info('[WRITE] output to %s' % output_path)
-            with open(output_path, 'w') as ofile:
+            # Dump Product List
+            with open(output_path + '.doc', 'w') as ofile:
                 ofile.write(json.dumps(doc_list, default=date_handler))
+            with open(output_path + '.price', 'w') as ofile:
+                ofile.write(json.dumps(price_list, default=date_handler))
         else:
-            es_index, es_doctype = br, category            
+            #es_index, es_doctype = br, category            
             logging.info('[LOAD ES] loading to ElasticSearch...')
-            bulk_load_es(es_host, es_port, es_index, es_doctype, doc_list)
+            preprocessed_list = []
+            for doc in doc_list:
+                preprocessed_list.append({ "index" : { "_index" : br, "_type" : category, "_id" : doc['product_id'] } })
+                preprocessed_list.append(doc)
+            bulk_load_es(es_host, es_port, br, category, preprocessed_list, opt_dict=None)
+            bulk_load_es(es_host, es_port, br, 'price', price_list)
 
