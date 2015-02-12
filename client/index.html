@@ -17,29 +17,30 @@
 	<nav class="navbar navbar-default navbar-fixed-top">
 	  <div class="container-fluid">
 	    <!-- Brand and toggle get grouped for better mobile display -->
-	    <div class="navbar-header">	      
-	      <!-- <a class="navbar-brand" style=" font-weight:normal;" href="#home">STYLE STEAL</a> -->
-
-	      <a class="navbar-brand"><img src="assets/img/stylesteal_logo.png" width="150" alt="STYLE STEAL"></a>
+	    <div class="navbar-header">	      	      
+	      <a href="#home" class="navbar-brand"><img src="assets/img/stylesteal_logo.png" width="150" alt="STYLE STEAL"></a>
 	    </div>
 	    <!-- Collect the nav links, forms, and other content for toggling -->	    
 	    <div class="collapse navbar-collapse">	      
 	      <ul class="nav navbar-nav">
 	        <li><a href="#track">TRACK PRICES<span class="sr-only">(current)</span></a></li>
 	        <li><a href="#deals">FIND DEALS</a></li>
-	        <li><a href="#watchlist">MY WATCH LIST</a></li>
+	        <li ng-if="currentUser"><a href="#watchlist">MY WATCH LIST</a></li>
 	      </ul>	
 	      <ul class="nav navbar-nav navbar-right">
-	        <li><a href="#">Log In</a></li>
-	        <li><a href="#">Sign up</a></li>	        
+	        <li ng-if="!currentUser"><a href="#login">Log In</a></li>	        
+	        <li ng-if="!currentUser"><a href="#">Sign up</a></li>	        
+	        <li ng-if="currentUser"><a>Welcome, <span ng-bind="currentUser.name"></span></a></li>
+	        <li ng-if="currentUser"><a href="#logout" ng-click="logout()" >Log Out</a></li>
 	      </ul>	    	  	  
 	    </div><!-- /.navbar-collapse -->	  
 	  </div><!-- /.container-fluid -->
 	</nav>
 	</div>
-	<div class="row" id="below-nav"></div>
+	<div class="row" id="below-nav"></div>	
 
 	<div class="container" id="main-container">
+		<div login-dialog ng-if="!isLoginPage"></div>
 		<div ui-view></div>
 	</div>	
 
@@ -102,8 +103,7 @@
     <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 	<script src="bower_components/d3/d3.js"></script>
 	<script src="bower_components/nvd3/nv.d3.js"></script> <!-- or use another assembly -->
-	<script src="bower_components/angular-nvd3/dist/angular-nvd3.js"></script>
-	<script src="http://luis-almeida.github.io/unveil/jquery.unveil.js"></script>
+	<!--<script src="bower_components/angular-nvd3/dist/angular-nvd3.js"></script>-->	
 
 
 	<!-- Custom JavaScript -->	
@@ -112,11 +112,31 @@
 	<script src="app/shared/chart.options.js"></script>	
 	<script src="app/shared/esService.js"></script>	
 	<script src="app/components/trackPrice/trackPriceController.js"></script>	
+	<!-- Input Login JavaScript -->
+	<script src="app/shared/login/loginController.js"></script>
+	<script src="app/shared/login/authService.js"></script>	
+	<script src="app/shared/login/session.js"></script>	
 	<script>
-		app.controller('mainController', ['$scope', 'esClient', function($scope, esClient) {
+		app.controller('mainController', ['$scope', 'esClient', 'AuthService', 'AUTH_EVENTS', 
+			'USER_ROLES',  'Session', 
+			function($scope, esClient, AuthService, AUTH_EVENTS, USER_ROLES, Session) {
 			$scope.search_params = {				
 				'brand': 'forever21',
 				'category': 'f21',
+			}
+
+			$scope.currentUser = null;	
+			$scope.userRoles = USER_ROLES;
+			$scope.isAuthorized = AuthService.isAuthorized;
+			$scope.setCurrentUser = function (user) {
+				$scope.currentUser = user;
+				console.log($scope.currentUser);
+			};
+			$scope.logout = function(){
+				$scope.currentUser = null;
+				$scope.userRoles = null;	
+				Session.destroy();			
+				$scope.$broadcast(AUTH_EVENTS.logoutSuccess);
 			}
 		}]);
 	</script>
