@@ -14,7 +14,9 @@ app.constant('AUTH_EVENTS', {
   logoutSuccess: 'auth-logout-success',
   sessionTimeout: 'auth-session-timeout',
   notAuthenticated: 'auth-not-authenticated',
-  notAuthorized: 'auth-not-authorized'
+  notAuthorized: 'auth-not-authorized',
+  signupSuccess: 'auth-signup-success',
+  signupFailed: 'auth-signup-failed'
 });
 
 app.run(['$rootScope', 'AUTH_EVENTS', 'AuthService', function ($rootScope, AUTH_EVENTS, AuthService) {

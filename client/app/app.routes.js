@@ -25,6 +25,11 @@ app.config(['$stateProvider', '$urlRouterProvider', 'USER_ROLES',
 		      authorizedRoles: [USER_ROLES.all]
 		    }
 		})
+		.state('signup', {
+			url: '/signup',
+			templateUrl: 'app/shared/signup/signup-page.html',
+			controller: 'signupController',
+		})
 		.state('login', {
 			url: '/login',
 			templateUrl: 'app/shared/login/login-form.html',

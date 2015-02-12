@@ -1,0 +1,48 @@
+<div class="row">
+	<div class="col-md-12"> 
+		<h3>Join StyleSteal now!</h3>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12"> 
+	<form name="signupForm" ng-submit="signup(credentials)">
+		<div class="form-group">
+			<label for="username" class="col-sm-2 control-label"> *Name: </label>
+			<input type="text"
+				   id="username"
+				   required
+				   ng-model="credentials.name">
+		</div>
+		<div class="form-group">
+			<label for="email" class="col-sm-2 control-label"> *Email: </label>
+			<input type="text"
+				   id="email"
+				   required
+				   ng-model="credentials.email">
+		</div>
+		<div class="form-group">		
+			<label for="password" class="col-sm-2 control-label"> *Password:</label>
+			<input type="password"
+				   id="password"
+				   required
+				   ng-model="credentials.password">
+		</div>
+		<div class="form-group">
+			<label for="confirm_password" class="col-sm-2 control-label">*Confirm Password:</label>
+			<input type="password"
+				   id="confirm_password"				  
+				   ng-model="credentials.confirm_password">
+			<label ng-if="(credentials.confirm_password) && (credentials.password != credential.confirm_password)">
+				password doesn't match!
+			</label>
+		</div>		
+		<div class="form-group">
+			<div class="col-sm-4">
+				<button class="btn btn-like" type="submit" ng-disabled="credentials.password != credentials.confirm_password">Sign Up</button>
+				<button class="btn btn-like" type="reset">Clear</button>
+			</div>
+			
+		</div>
+	</form>
+	</div>
+</div>
